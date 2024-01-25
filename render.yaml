@@ -1,5 +1,6 @@
 services:
   - name: Roamweather
     env: python
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app -b 0.0.0.0:8080
+    type: web
+    buildCommand: python -m pip install -r requirements.txt
+    startCommand: gunicorn weatherproject.wsgi:application -b :$PORT
