@@ -1,0 +1,33 @@
+{% extends 'weatherapp/base.html' %}
+
+{% block content %}
+    {% if error_message %}
+    <!-- Displaying an error message if there is an issue with fetching weather data -->
+    <div class="alert alert-danger" role="alert">
+        {% if '404' in error_message %}
+            <!-- Handling 404 error for city not found -->
+            City not found. Please enter a valid city name.
+        {% else %}
+            <!-- Handling other errors -->
+            Oops! Something is going wrong while fetching weather data. Please try again later.
+        {% endif %}
+    </div>
+    {% else %}
+        <!-- Displaying current weather information -->
+        <h2 class="mb-4">Current Weather for {{ city }}, {{ city_info.country }}</h2>
+        <div class="d-flex justify-content-center align-items-center">
+            <div class="card rounded shadow-lg m-2" style="width: 18rem;">
+                <!-- Displaying the weather icon -->
+                <img src="https://openweathermap.org/img/wn/{{ weather.0.icon }}@2x.png" class="card-img-top" alt="Weather Icon" style="max-width: 70%; height: auto; margin: -10px auto 0;">
+                <div class="card-body">
+                    <!-- Displaying weather details -->
+                    <h6 class="card-subtitle mb-3 text-muted"> {{ weather.0.main }}</h6>
+                    <p class="card-text mb-2"> {{ weather.0.description }}</p>
+                    <p class="card-text mb-2"> Temperature: {{ main.temp }} Celsius</p>
+                    <p class="card-text mb-2"> Humidity: {{ main.humidity }}%</p>
+                    <p class="card-text mb-0"> Pressure: {{ main.pressure }} hPa</p>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

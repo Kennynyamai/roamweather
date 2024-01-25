@@ -1,0 +1,37 @@
+{% extends 'weatherapp/base.html' %}
+
+{% block content %}
+    <!-- Displaying an error message if it exists -->
+    {% if error_message %}
+        <div class="alert alert-danger" role="alert">
+            {% if '404' in error_message %}
+                City not found. Please enter a valid city name.
+            {% else %}
+                Oops! Something is going wrong while fetching weather data. Please try again later.
+            {% endif %}
+        </div>
+    <!-- Displaying the weather forecast if no error message -->
+    {% else %}
+        <h2 class="mb-4">5-Day Noon Forecast for {{ city_info.name }}, {{ city_info.country }}</h2>
+        <div class="row">
+            <!-- Iterating through forecast entries and displaying each in a card -->
+            {% for forecast_entry in forecast_list %}
+                <div class="col-md-3">
+                    <div class="card mb-3">
+                        <!-- Displaying the weather icon in the card -->
+                        <img src="https://openweathermap.org/img/wn/{{ forecast_entry.weather.0.icon }}@2x.png" class="card-img-top" alt="Weather Icon" style="max-width: 70%; height: auto; margin: -10px auto 0;">
+                        <div class="card-body">
+                            <!-- Displaying the date and time of the forecast entry -->
+                            <h5 class="card-title">{{ forecast_entry.dt_txt }}</h5>
+                            <!-- Displaying the temperature, weather description, humidity, and pressure -->
+                            <p class="card-text"> Temperature: {{ forecast_entry.main.temp }} Celsius</p>
+                            <p class="card-text"> Description: {{ forecast_entry.weather.0.description }}</p>
+                            <p class="card-text"> Humidity: {{ forecast_entry.main.humidity }}%</p>
+                            <p class="card-text"> Pressure: {{ forecast_entry.main.pressure }} hPa</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endblock %}
