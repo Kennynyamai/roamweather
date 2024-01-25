@@ -3,4 +3,4 @@ services:
     env: python
     type: web
     buildCommand: python -m pip install -r requirements.txt
-    startCommand: gunicorn weatherproject.wsgi:application -b :$PORT
+    startCommand: gunicorn -b 0.0.0.0:$PORT weatherproject.wsgi:application
