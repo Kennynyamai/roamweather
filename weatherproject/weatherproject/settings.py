@@ -6,8 +6,8 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "-_&idi$d9#f6e!%r2)z9gr@e*(x7n5g-0kz7eu*mr4b)*y@bzn"
-
+SECRET_KEY = os.getenv("SECRET_KEY")
+OPENWEATHERMAP_API_KEY = os.getenv("OPENWEATHERMAP_API_KEY")
 
 DEBUG = False
 

@@ -1,7 +1,0 @@
-- type: web
-  name: my-web-service
-  envVars:
-    - key: DJANGO_SETTINGS_MODULE
-      value: "weatherproject.settings"
-  buildCommand: "pip install -r requirements.txt"
-  startCommand: "gunicorn weatherproject.wsgi:application -b :$PORT"

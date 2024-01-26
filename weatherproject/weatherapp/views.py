@@ -4,8 +4,6 @@ from datetime import datetime
 from django.conf import settings
 from .forms import CitySearchForm
 
-api_key = "2714ebb41345a682c696766ecde571b4"
-
 # Helper function to format date and time
 def format_datetime(dt_txt):
     # Parse and formatting the date and time string
@@ -33,6 +31,9 @@ def home(request):
         city = form.cleaned_data['city']
     else:
         city = 'Nairobi'
+
+    # Fetch the OpenWeatherMap API key from settings
+    api_key = settings.OPENWEATHERMAP_API_KEY
 
     # Build the URL for the current weather API request
     current_weather_url = f'https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}&units=metric'
@@ -72,6 +73,8 @@ def weather_forecast(request):
     else:
         city = 'Nairobi'
 
+    # Fetch the OpenWeatherMap API key from settings
+    api_key = settings.OPENWEATHERMAP_API_KEY
 
     # Build the URL for the weather forecast API request
     url = f'https://api.openweathermap.org/data/2.5/forecast?q={city}&appid={api_key}&units=metric'
